@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Vista previa para aprobación: quitar noindex cuando el sitio sea oficial -->
+<meta name="robots" content="noindex, nofollow">
+<title>Araceli Olaechea — Fashion Journalist &amp; Writer</title>
+<meta name="description" content="Araceli Olaechea Landa is a fashion journalist and writer with experience at V Magazine, CR Fashion Book and COSAS.">
+<meta property="og:title" content="Araceli Olaechea">
+<meta property="og:description" content="Fashion journalist and writer. V Magazine, CR Fashion Book, COSAS.">
+<meta property="og:image" content="assets/works/01.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Home v2 — estética editorial/suiza pedida por Araceli (referencias: Other°, Davidson van de Ven, Neue Montreal).
+     "Neue Montreal" se usa si está instalada; si no, Inter Tight (la más cercana gratuita). */
+  :root {
+    --bg: #f3f3f1;
+    --ink: #111110;
+    --mute: #9a9a96;
+    --line: rgba(17, 17, 16, .14);
+    --sans: "Neue Montreal", "PP Neue Montreal", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --pad: clamp(16px, 2.2vw, 36px);
+    --gap: clamp(12px, 1.4vw, 24px);
+    --ease: cubic-bezier(.2, .7, .1, 1);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 14px; line-height: 1.35; font-weight: 400;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, video { display: block; width: 100%; height: auto; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  .wrap { padding-inline: var(--pad); }
+  .g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+  .mono { font-family: var(--mono); font-size: 11px; line-height: 1.3; letter-spacing: .02em; text-transform: uppercase; }
+  .mute { color: var(--mute); }
+  .link-u { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s var(--ease); }
+  .link-u:hover, .link-u:focus-visible { background-size: 100% 1px; }
+
+  /* Barra superior */
+  .top { padding-block: 18px; font-size: 13px; align-items: baseline; }
+  .top .brand { grid-column: 1 / span 3; font-weight: 500; }
+  .top .role { grid-column: 4 / span 3; }
+  .top nav { grid-column: 7 / span 3; display: flex; gap: 14px; }
+  .top nav a[aria-current] { box-shadow: inset 0 -1px 0 currentColor; }
+  .top .ext { grid-column: 10 / span 3; text-align: right; }
+
+  /* Hero */
+  .hero { padding-top: clamp(64px, 11vw, 190px); }
+  .wordmark {
+    grid-column: 1 / -1; margin: 0;
+    font-size: clamp(54px, 11.4vw, 232px); font-weight: 500;
+    letter-spacing: -.055em; line-height: .86; white-space: nowrap;
+  }
+  .wordmark sup { font-size: .32em; letter-spacing: 0; vertical-align: .95em; margin-left: .04em; font-weight: 400; }
+  .hero-meta { margin-top: clamp(28px, 3.4vw, 56px); align-items: start; font-size: 13px; }
+  .hero-meta .k { grid-column: 1 / span 3; }
+  .hero-meta .bio { grid-column: 7 / span 3; margin: 0; }
+  .hero-meta .soc { grid-column: 10 / span 3; display: flex; justify-content: flex-end; gap: 16px; }
+
+  /* Destacado: Barrios de Lima */
+  .featured { margin-top: clamp(96px, 12vw, 200px); align-items: stretch; }
+  .featured .txt { grid-column: 1 / span 5; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+  .featured .quote { max-width: 34ch; margin: 0 0 0 auto; font-size: 13px; text-indent: 3.2em; }
+  .featured h2 {
+    margin: 0; font-weight: 700; text-transform: uppercase;
+    font-size: clamp(40px, 5.6vw, 108px); line-height: .86; letter-spacing: -.045em;
+  }
+  .featured .count { margin-bottom: 14px; }
+  .featured .vid { grid-column: 6 / span 7; }
+  .featured .vid video { aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+  .cap-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
+
+  /* Trabajos */
+  .works { margin-top: clamp(110px, 13vw, 220px); }
+  .works-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 18px; }
+  .works-head h2 { margin: 0; font-size: clamp(22px, 2.2vw, 34px); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
+  .works-head h2 sup { font-size: .42em; font-weight: 400; margin-left: .15em; vertical-align: 1.1em; letter-spacing: 0; }
+  .views { display: flex; gap: clamp(28px, 8vw, 150px); }
+  .views button {
+    font-size: clamp(22px, 2.2vw, 34px); font-weight: 500; letter-spacing: -.02em; line-height: 1;
+    color: var(--mute); transition: color .25s;
+  }
+  .views button[aria-pressed="true"], .views button:hover { color: var(--ink); }
+
+  .items { list-style: none; margin: 0; padding: 0; transition: opacity .25s; }
+  .items.switching { opacity: 0; }
+  .item .media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #e4e4e0; }
+  .item .media img, .item .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease), opacity .6s; }
+  .item .media img { opacity: 0; }
+  .item .media img.ok { opacity: 1; }
+  .item:hover .media img, .item:hover .media video { transform: scale(1.035); }
+  .item .meta { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; margin-top: 8px; }
+  .item .title { margin: 3px 0 0; font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: -.005em; }
+
+  /* Vista Grid (4 columnas pegadas) */
+  .items[data-view="grid"] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 10px; row-gap: 28px; }
+  /* Vista Feed (2 columnas grandes) */
+  .items[data-view="feed"] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; row-gap: 36px; }
+  .items[data-view="feed"] .title { font-size: clamp(16px, 1.5vw, 22px); }
+  /* Vista List */
+  .items[data-view="list"] { border-top: 1px solid var(--line); }
+  .items[data-view="list"] .item { border-bottom: 1px solid var(--line); }
+  .items[data-view="list"] .media { display: none; }
+  .items[data-view="list"] .row {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+    align-items: baseline; padding-block: 14px;
+  }
+  .items[data-view="list"] .meta { display: contents; }
+  .items[data-view="list"] .n { grid-column: 1 / span 1; }
+  .items[data-view="list"] .title { grid-column: 2 / span 6; order: 2; margin: 0; font-size: clamp(18px, 1.9vw, 30px); letter-spacing: -.02em; transition: transform .35s var(--ease); }
+  .items[data-view="list"] .pub { grid-column: 9 / span 3; order: 3; }
+  .items[data-view="list"] .yr { grid-column: 12 / span 1; order: 4; text-align: right; }
+  .items[data-view="list"] .item:hover .title { transform: translateX(10px); }
+  .preview {
+    position: fixed; z-index: 30; width: 220px; aspect-ratio: 4 / 5; pointer-events: none;
+    top: 0; left: 0; opacity: 0; transition: opacity .2s; background: #ddd center / cover no-repeat;
+  }
+  .preview.on { opacity: 1; }
+
+  /* Publicaciones */
+  .pubs { margin-top: clamp(120px, 14vw, 240px); border-top: 1px solid var(--line); padding-top: 14px; }
+  .pubs .meta3 { margin-bottom: clamp(40px, 5vw, 80px); }
+  .pubs .meta3 > :nth-child(1) { grid-column: 1 / span 4; }
+  .pubs .meta3 > :nth-child(2) { grid-column: 5 / span 4; }
+  .pubs .meta3 > :nth-child(3) { grid-column: 9 / span 4; text-align: right; }
+  .pub-list { margin: 0; font-size: clamp(34px, 5.4vw, 104px); font-weight: 500; line-height: .98; letter-spacing: -.045em; }
+  .pub-list span { white-space: nowrap; }
+  .pub-list sup { font-family: var(--mono); font-size: .17em; font-weight: 400; letter-spacing: 0; vertical-align: 2.8em; margin-left: .2em; margin-right: .35em; }
+
+  /* About */
+  .about { margin-top: clamp(120px, 14vw, 240px); align-items: start; }
+  .about .pic { grid-column: 1 / span 3; }
+  .about .pic img { aspect-ratio: 3 / 4; object-fit: cover; }
+  .about .body { grid-column: 5 / span 7; }
+  .about .lead { margin: 14px 0 clamp(28px, 3vw, 48px); font-size: clamp(28px, 3.3vw, 58px); font-weight: 500; line-height: 1.02; letter-spacing: -.035em; }
+  .about .bio { max-width: 58ch; margin: 0; font-size: 15px; line-height: 1.45; }
+
+  footer { margin-top: clamp(120px, 14vw, 220px); padding-block: 14px 22px; border-top: 1px solid var(--line); }
+  footer > :nth-child(1) { grid-column: 1 / span 3; }
+  footer > :nth-child(2) { grid-column: 4 / span 3; }
+  footer > :nth-child(3) { grid-column: 7 / span 3; }
+  footer > :nth-child(4) { grid-column: 10 / span 3; text-align: right; }
+
+  /* Aparición al hacer scroll */
+  .js .rv { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
+    .item .media img, .item .media video, .items, .items[data-view="list"] .title { transition: none; }
+    .item:hover .media img, .item:hover .media video { transform: none; }
+  }
+  @media (hover: none), (pointer: coarse) { .preview { display: none; } }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .items[data-view="grid"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .top .role { display: none; }
+    .top .brand { grid-column: 1 / span 5; }
+    .top nav { grid-column: 6 / span 4; }
+  }
+  /* Celular */
+  @media (max-width: 700px) {
+    .g12 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .top .brand { grid-column: 1 / span 2; }
+    .top nav { grid-column: 3 / span 2; justify-content: flex-end; }
+    .top .ext { display: none; }
+    .wordmark { font-size: 19.5vw; white-space: normal; line-height: .84; }
+    .hero-meta .k { grid-column: 1 / -1; margin-bottom: 18px; }
+    .hero-meta .bio { grid-column: 1 / span 3; }
+    .hero-meta .soc { grid-column: 1 / -1; justify-content: flex-start; margin-top: 18px; }
+    .featured .txt, .featured .vid { grid-column: 1 / -1; }
+    .featured .txt { gap: 28px; margin-bottom: 20px; }
+    .featured .quote { margin: 0; }
+    .works-head { flex-direction: column; align-items: flex-start; }
+    .views { gap: 28px; }
+    .items[data-view="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+    .items[data-view="feed"] { grid-template-columns: 1fr; }
+    .items[data-view="list"] .row { grid-template-columns: 2.2em 1fr auto; column-gap: 10px; }
+    .items[data-view="list"] .n { grid-column: 1; }
+    .items[data-view="list"] .title { grid-column: 2; font-size: 18px; }
+    .items[data-view="list"] .pub { display: none; }
+    .items[data-view="list"] .yr { grid-column: 3; }
+    .pubs .meta3 > :nth-child(1) { grid-column: 1 / span 2; }
+    .pubs .meta3 > :nth-child(2) { display: none; }
+    .pubs .meta3 > :nth-child(3) { grid-column: 3 / span 2; }
+    .pub-list { font-size: 11.5vw; }
+    .about .pic { grid-column: 1 / span 2; margin-bottom: 24px; }
+    .about .body { grid-column: 1 / -1; }
+    footer { row-gap: 8px; }
+    footer > :nth-child(odd) { grid-column: 1 / span 2; }
+    footer > :nth-child(even) { grid-column: 3 / span 2; text-align: right; }
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="top wrap g12" id="top">
+  <a class="brand" href="#top">Araceli Olaechea°</a>
+  <span class="role">Fashion Journalist &amp; Writer</span>
+  <nav aria-label="Main">
+    <a href="#index" aria-current="page">Index</a>
+    <a class="link-u" href="#about">About</a>
+  </nav>
+  <a class="ext link-u" href="https://www.instagram.com/araceliolaechea/" target="_blank" rel="noopener">@araceliolaechea ↗</a>
+</header>
+
+<main>
+  <section class="hero wrap g12">
+    <h1 class="wordmark rv">Araceli Olaechea<sup>°</sup></h1>
+    <div class="hero-meta g12 rv" style="grid-column:1/-1">
+      <span class="k mono mute">(Portfolio — 2024/2026)</span>
+      <p class="bio">Fashion journalist and writer. Stories on the cultural and behavioral dimensions of fashion for V Magazine, CR Fashion Book and COSAS.</p>
+      <div class="soc">
+        <a class="link-u" href="#about">About</a>
+        <a class="link-u" href="https://www.instagram.com/araceliolaechea/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured wrap g12" aria-labelledby="feat-title">
+    <div class="txt rv">
+      <p class="quote">“Muchas gracias a todos los comerciantes, ambulantes y a los que trabajan en los mercados.”</p>
+      <div>
+        <div class="count mono">(Featured / 01)</div>
+        <h2 id="feat-title">Barrios<br>de Lima.</h2>
+      </div>
+    </div>
+    <figure class="vid rv" style="margin:0">
+      <video src="assets/home/00.mp4" poster="assets/home/00-poster.jpg" width="1600" height="900" autoplay muted loop playsinline preload="metadata" aria-label="Barrios de Lima — film"></video>
+      <figcaption class="cap-row mono"><span>/01</span><span>Barrios de Lima — Film</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="works wrap" id="index" aria-labelledby="works-title">
+    <div class="works-head rv">
+      <h2 id="works-title">Selected Work<sup id="works-count"></sup></h2>
+      <div class="views" role="group" aria-label="View">
+        <button type="button" data-v="grid" aria-pressed="true">Grid</button>
+        <button type="button" data-v="list" aria-pressed="false">List</button>
+        <button type="button" data-v="feed" aria-pressed="false">Feed</button>
+      </div>
+    </div>
+    <ul class="items" id="items" data-view="grid"></ul>
+  </section>
+
+  <section class="pubs wrap" aria-labelledby="pubs-title">
+    <div class="meta3 g12 mono">
+      <span id="pubs-title">Publications</span>
+      <span>2024 — 2026</span>
+      <span id="pubs-total"></span>
+    </div>
+    <p class="pub-list rv" id="pub-list"></p>
+  </section>
+
+  <section class="about wrap g12" id="about" aria-labelledby="about-title">
+    <div class="pic rv"><img src="assets/about/retrato.jpg" width="1200" height="1602" alt="Portrait of Araceli Olaechea" loading="lazy" decoding="async"></div>
+    <div class="body rv">
+      <div class="mono" id="about-title">(About)</div>
+      <p class="lead">Writing on the cultural and behavioral dimensions of fashion.</p>
+      <p class="bio">Araceli Olaechea Landa is a fashion journalist and writer with experience at V Magazine, CR Fashion Book, and COSAS. She holds a Bachelor of Arts in Psychology from the Pontifical Catholic University of Peru, an academic foundation that shapes her interest in the cultural and behavioral dimensions of fashion. Her professional background spans editorial writing, public relations, and creative direction, supported by proficiency in digital strategy and design. Raised bilingual in Spanish and English within an international environment, she aims to produce thoughtful content that connects with diverse audiences.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap g12 mono">
+  <span>© 2026 Araceli Olaechea</span>
+  <span>Fashion Journalist &amp; Writer</span>
+  <a class="link-u" href="https://www.instagram.com/araceliolaechea/" target="_blank" rel="noopener">Instagram ↗</a>
+  <a class="link-u" href="#top">Back to top ↑</a>
+</footer>
+
+<div class="preview" id="preview" aria-hidden="true"></div>
+
+<script>
+  // ─── EDITA AQUÍ los trabajos (orden = orden en la web) ───────────────────
+  // pub: publicación · title: título · year: año ('' si no se sabe) · img o video
+  const WORKS = [
+    { pub: 'Vogue Philippines', title: 'The Wanderlust Issue', year: '2025', img: 'assets/works/01.jpg' },
+    { pub: 'Schön! Magazine', title: 'Migrant Birds', year: '', img: 'assets/works/02.jpg' },
+    { pub: "L'Officiel Baltic", title: 'Paulista', year: '', img: 'assets/works/03.jpg' },
+    { pub: 'Institute Magazine', title: 'Nomad', year: '', img: 'assets/works/04.jpg' },
+    { pub: 'V Magazine', title: 'What V Want — V155', year: '2025', img: 'assets/works/05.jpg' },
+    { pub: 'CR Fashion Book', title: 'CR Reviews: Jacquemus Fall 2026', year: '2026', video: 'assets/home/10.mp4', poster: 'assets/home/10-poster.jpg' },
+    { pub: 'V Magazine', title: 'V Girls — V160', year: '2026', img: 'assets/works/07.jpg' },
+    { pub: 'CR Fashion Book', title: "The Mastery of Shaun Leane's Runway Jewelry", year: '2026', img: 'assets/works/08.jpg' },
+    { pub: 'COSAS', title: 'Sara Flores: Una mujer que teje la naturaleza', year: '2024', img: 'assets/works/09.jpg' },
+    { pub: 'CR Fashion Book', title: 'Remembering Valentino Garavani by His Iconic Designs', year: '2026', img: 'assets/works/10.jpg' },
+    { pub: 'V Magazine', title: "Inside Harry Lambert's Pandora Wonders", year: '2026', img: 'assets/works/11.jpg' },
+    { pub: 'CR Fashion Book', title: "Inside Yves Saint Laurent's Moroccan Sanctuary", year: '2026', img: 'assets/works/12.jpg' },
+    { pub: 'VMAN', title: 'What VMen Want — VMAN 55', year: '2025', img: 'assets/works/13.jpg' },
+    { pub: 'CR Fashion Book', title: 'Milan Fashion Week Recap', year: '2026', img: 'assets/works/14.jpg' },
+    { pub: 'CR Fashion Book', title: 'How Versace Accidentally Created Google Images', year: '2026', img: 'assets/works/15.jpg' },
+    { pub: 'COSAS', title: 'COSAS Now — Profile', year: '2025', img: 'assets/works/16.jpg' },
+    { pub: 'CR Fashion Book', title: 'Everything You Missed in Fashion This Week', year: '2026', img: 'assets/works/17.jpg' },
+    { pub: 'CR Fashion Book', title: 'What You Missed in Fashion This Week', year: '2026', video: 'assets/home/23.mp4', poster: 'assets/home/23-poster.jpg' },
+    { pub: 'CR Fashion Book', title: 'Why Are Creative Directors So Obsessed with Vegetables?', year: '2026', img: 'assets/works/19.jpg' },
+    { pub: 'CR Fashion Book', title: 'Why Hermès Waited 190 Years to Enter Haute Couture', year: '2026', img: 'assets/works/20.jpg' },
+    { pub: 'CR Fashion Book', title: 'Alexander McQueen & Isabella Blow', year: '2026', img: 'assets/works/21.jpg' },
+    { pub: 'CR Fashion Book', title: 'The Return of Fur', year: '2026', img: 'assets/works/22.jpg' },
+    { pub: 'CR Fashion Book', title: 'The Spanish Village Elsa Peretti Brought Back to Life', year: '2026', img: 'assets/works/23.jpg' },
+    { pub: 'CR Fashion Book', title: 'Collaborations That Shocked the Fashion World', year: '2026', img: 'assets/works/24.jpg' },
+  ];
+  // ─────────────────────────────────────────────────────────────────────────
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const list = document.getElementById('items');
+
+  list.innerHTML = WORKS.map((w, i) => {
+    const media = w.video
+      ? `<video src="${w.video}" poster="${w.poster}" muted loop playsinline preload="none" aria-label="${esc(w.title)}"></video>`
+      : `<img src="${w.img}" width="1000" height="1250" alt="${esc(w.pub)} — ${esc(w.title)}" loading="lazy" decoding="async">`;
+    return `<li class="item rv" data-img="${w.img || w.poster}">
+      <div class="media">${media}</div>
+      <div class="row">
+        <div class="meta mono"><span class="n">/${pad(i + 1)}</span><span class="pub">${esc(w.pub)}</span><span class="yr">${w.year || '—'}</span></div>
+        <h3 class="title">${esc(w.title)}</h3>
+      </div>
+    </li>`;
+  }).join('');
+  document.getElementById('works-count').textContent = `(${WORKS.length})`;
+
+  // Fotos: aparecen suave al terminar de cargar
+  list.querySelectorAll('img').forEach((img) => {
+    if (img.complete && img.naturalWidth) img.classList.add('ok');
+    else img.addEventListener('load', () => img.classList.add('ok'), { once: true });
+  });
+
+  // Publicaciones con conteo
+  const counts = {};
+  WORKS.forEach((w) => { counts[w.pub] = (counts[w.pub] || 0) + 1; });
+  const order = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  document.getElementById('pub-list').innerHTML = order
+    .map(([p, c], i) => `<span>${esc(p)}<sup>(${pad(c)})</sup></span>${i < order.length - 1 ? ' ' : ''}`)
+    .join('');
+  document.getElementById('pubs-total').textContent = `${order.length} titles`;
+
+  // Aparición al hacer scroll + videos que solo corren cuando se ven
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -6% 0px' }) : null;
+  document.querySelectorAll('.rv').forEach((el) => io ? io.observe(el) : el.classList.add('in'));
+
+  const vio = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else { v.pause(); }
+    });
+  }, { threshold: .15 }) : null;
+  document.querySelectorAll('video').forEach((v) => vio && vio.observe(v));
+
+  // Cambio de vista
+  const buttons = document.querySelectorAll('.views button');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    if (list.dataset.view === b.dataset.v) return;
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    list.classList.add('switching');
+    setTimeout(() => {
+      list.dataset.view = b.dataset.v;
+      list.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
+      list.classList.remove('switching');
+    }, reduce ? 0 : 220);
+  }));
+
+  // Vista List: miniatura que sigue el cursor
+  const prev = document.getElementById('preview');
+  list.addEventListener('mousemove', (e) => {
+    const it = e.target.closest('.item');
+    if (list.dataset.view !== 'list' || !it) { prev.classList.remove('on'); return; }
+    const url = `url("${it.dataset.img}")`;
+    if (prev.style.backgroundImage !== url) prev.style.backgroundImage = url;
+    prev.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 140}px)`;
+    prev.classList.add('on');
+  });
+  list.addEventListener('mouseleave', () => prev.classList.remove('on'));
+</script>
+</body>
+</html>
