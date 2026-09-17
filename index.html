@@ -47,8 +47,7 @@
   /* Barra superior */
   .top { padding-block: 18px; font-size: 13px; align-items: baseline; }
   .top .brand { grid-column: 1 / span 3; font-weight: 500; }
-  .top .role { grid-column: 4 / span 3; }
-  .top nav { grid-column: 7 / span 3; display: flex; gap: 14px; }
+  .top nav { grid-column: 4 / span 6; display: flex; gap: clamp(12px, 1.4vw, 22px); }
   .top nav a[aria-current] { box-shadow: inset 0 -1px 0 currentColor; }
   .top .ext { grid-column: 10 / span 3; text-align: right; }
 
@@ -92,7 +91,10 @@
 
   .items { list-style: none; margin: 0; padding: 0; transition: opacity .25s; }
   .items.switching { opacity: 0; }
-  .item .media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #e4e4e0; }
+  .item .media { position: relative; aspect-ratio: var(--ar, 4 / 5); overflow: hidden; background: #e4e4e0; }
+  /* Piezas de revista (portadas, páginas y spreads): se muestran completas, sin recorte */
+  .item.doc .media { background: transparent; }
+  .item.doc .media img { object-fit: contain; }
   .item .media img, .item .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease), opacity .6s; }
   .item .media img { opacity: 0; }
   .item .media img.ok { opacity: 1; }
@@ -101,9 +103,11 @@
   .item .title { margin: 3px 0 0; font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: -.005em; }
 
   /* Vista Grid (4 columnas pegadas) */
-  .items[data-view="grid"] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 10px; row-gap: 28px; }
+  .items[data-view="grid"] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 10px; row-gap: 28px; align-items: start; }
+  .items[data-view="grid"] .item.wide { grid-column: span 2; }
   /* Vista Feed (2 columnas grandes) */
-  .items[data-view="feed"] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; row-gap: 36px; }
+  .items[data-view="feed"] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; row-gap: 36px; align-items: start; }
+  .items[data-view="feed"] .item.wide { grid-column: 1 / -1; }
   .items[data-view="feed"] .title { font-size: clamp(16px, 1.5vw, 22px); }
   /* Vista List */
   .items[data-view="list"] { border-top: 1px solid var(--line); }
@@ -120,10 +124,26 @@
   .items[data-view="list"] .yr { grid-column: 12 / span 1; order: 4; text-align: right; }
   .items[data-view="list"] .item:hover .title { transform: translateX(10px); }
   .preview {
-    position: fixed; z-index: 30; width: 220px; aspect-ratio: 4 / 5; pointer-events: none;
+    position: fixed; z-index: 30; width: 220px; aspect-ratio: var(--ar, 4 / 5); pointer-events: none;
+    background-size: cover;
     top: 0; left: 0; opacity: 0; transition: opacity .2s; background: #ddd center / cover no-repeat;
   }
   .preview.on { opacity: 1; }
+
+  /* Capítulos (Writing / Social / Production) */
+  .chapter { margin-top: clamp(64px, 8vw, 132px); scroll-margin-top: 80px; }
+  .chapter:first-child { margin-top: clamp(28px, 3vw, 44px); }
+  .ch-head { border-top: 1px solid var(--line); padding-top: 12px; margin-bottom: clamp(20px, 2.4vw, 34px); }
+  .ch-meta { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+  .ch-meta > :nth-child(1) { grid-column: 1 / span 4; }
+  .ch-meta > :nth-child(2) { grid-column: 5 / span 4; }
+  .ch-meta > :nth-child(3) { grid-column: 9 / span 4; text-align: right; }
+  .ch-title {
+    margin: clamp(10px, 1.2vw, 18px) 0 0; font-weight: 700; text-transform: uppercase;
+    font-size: clamp(30px, 4.4vw, 76px); line-height: .88; letter-spacing: -.045em;
+  }
+  .chapter.empty .items { display: none; }
+  .ch-empty { margin: 0; padding-block: clamp(28px, 4vw, 56px); max-width: 44ch; color: var(--mute); }
 
   /* Publicaciones */
   .pubs { margin-top: clamp(120px, 14vw, 240px); border-top: 1px solid var(--line); padding-top: 14px; }
@@ -163,15 +183,14 @@
   /* Tablet */
   @media (max-width: 1024px) {
     .items[data-view="grid"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .top .role { display: none; }
-    .top .brand { grid-column: 1 / span 5; }
-    .top nav { grid-column: 6 / span 4; }
+    .top .brand { grid-column: 1 / span 4; }
+    .top nav { grid-column: 5 / span 5; }
   }
   /* Celular */
   @media (max-width: 700px) {
     .g12 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .top .brand { grid-column: 1 / span 2; }
-    .top nav { grid-column: 3 / span 2; justify-content: flex-end; }
+    .top .brand { grid-column: 1 / -1; }
+    .top nav { grid-column: 1 / -1; justify-content: flex-start; gap: 14px; margin-top: 6px; }
     .top .ext { display: none; }
     .wordmark { font-size: 19.5vw; white-space: normal; line-height: .84; }
     .hero-meta .k { grid-column: 1 / -1; margin-bottom: 18px; }
@@ -183,12 +202,17 @@
     .works-head { flex-direction: column; align-items: flex-start; }
     .views { gap: 28px; }
     .items[data-view="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+    .items[data-view="grid"] .item.wide { grid-column: 1 / -1; }
     .items[data-view="feed"] { grid-template-columns: 1fr; }
     .items[data-view="list"] .row { grid-template-columns: 2.2em 1fr auto; column-gap: 10px; }
     .items[data-view="list"] .n { grid-column: 1; }
     .items[data-view="list"] .title { grid-column: 2; font-size: 18px; }
     .items[data-view="list"] .pub { display: none; }
     .items[data-view="list"] .yr { grid-column: 3; }
+    .ch-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .ch-meta > :nth-child(1) { grid-column: 1 / span 2; }
+    .ch-meta > :nth-child(2) { display: none; }
+    .ch-meta > :nth-child(3) { grid-column: 3 / span 2; }
     .pubs .meta3 > :nth-child(1) { grid-column: 1 / span 2; }
     .pubs .meta3 > :nth-child(2) { display: none; }
     .pubs .meta3 > :nth-child(3) { grid-column: 3 / span 2; }
@@ -206,9 +230,10 @@
 
 <header class="top wrap g12" id="top">
   <a class="brand" href="#top">Araceli Olaechea°</a>
-  <span class="role">Fashion Journalist &amp; Writer</span>
   <nav aria-label="Main">
-    <a href="#index" aria-current="page">Index</a>
+    <a class="link-u" href="#writing">Writing</a>
+    <a class="link-u" href="#social">Social</a>
+    <a class="link-u" href="#production">Production</a>
     <a class="link-u" href="#about">About</a>
   </nav>
   <a class="ext link-u" href="https://www.instagram.com/araceliolaechea/" target="_blank" rel="noopener">@araceliolaechea ↗</a>
@@ -250,7 +275,7 @@
         <button type="button" data-v="feed" aria-pressed="false">Feed</button>
       </div>
     </div>
-    <ul class="items" id="items" data-view="grid"></ul>
+    <div id="chapters"></div>
   </section>
 
   <section class="pubs wrap" aria-labelledby="pubs-title">
@@ -282,56 +307,92 @@
 <div class="preview" id="preview" aria-hidden="true"></div>
 
 <script>
-  // ─── EDITA AQUÍ los trabajos (orden = orden en la web) ───────────────────
-  // pub: publicación · title: título · year: año ('' si no se sabe) · img o video
+  // ─── CAPÍTULOS: el orden de esta lista es el orden en la web ────────────
+  const CHAPTERS = [
+    { id: 'writing',    n: 'Journalism & Writing', note: 'Editorial features, interviews and essays' },
+    { id: 'social',     n: 'Social Media',         note: 'Short-form video and recurring formats' },
+    { id: 'production', n: 'Creative Production',  note: 'Fashion editorials and creative direction' },
+  ];
+
+  // ─── EDITA AQUÍ los trabajos (orden = orden dentro de su capítulo) ──────
+  // cat: writing | social | production  ·  pub · title · year ('' si no se sabe) · img o video
   const WORKS = [
-    { pub: 'Vogue Philippines', title: 'The Wanderlust Issue', year: '2025', img: 'assets/works/01.jpg' },
-    { pub: 'Schön! Magazine', title: 'Migrant Birds', year: '', img: 'assets/works/02.jpg' },
-    { pub: "L'Officiel Baltic", title: 'Paulista', year: '', img: 'assets/works/03.jpg' },
-    { pub: 'Institute Magazine', title: 'Nomad', year: '', img: 'assets/works/04.jpg' },
-    { pub: 'V Magazine', title: 'What V Want — V155', year: '2025', img: 'assets/works/05.jpg' },
-    { pub: 'CR Fashion Book', title: 'CR Reviews: Jacquemus Fall 2026', year: '2026', video: 'assets/home/10.mp4', poster: 'assets/home/10-poster.jpg' },
-    { pub: 'V Magazine', title: 'V Girls — V160', year: '2026', img: 'assets/works/07.jpg' },
-    { pub: 'CR Fashion Book', title: "The Mastery of Shaun Leane's Runway Jewelry", year: '2026', img: 'assets/works/08.jpg' },
-    { pub: 'COSAS', title: 'Sara Flores: Una mujer que teje la naturaleza', year: '2024', img: 'assets/works/09.jpg' },
-    { pub: 'CR Fashion Book', title: 'Remembering Valentino Garavani by His Iconic Designs', year: '2026', img: 'assets/works/10.jpg' },
-    { pub: 'V Magazine', title: "Inside Harry Lambert's Pandora Wonders", year: '2026', img: 'assets/works/11.jpg' },
-    { pub: 'CR Fashion Book', title: "Inside Yves Saint Laurent's Moroccan Sanctuary", year: '2026', img: 'assets/works/12.jpg' },
-    { pub: 'VMAN', title: 'What VMen Want — VMAN 55', year: '2025', img: 'assets/works/13.jpg' },
-    { pub: 'CR Fashion Book', title: 'Milan Fashion Week Recap', year: '2026', img: 'assets/works/14.jpg' },
-    { pub: 'CR Fashion Book', title: 'How Versace Accidentally Created Google Images', year: '2026', img: 'assets/works/15.jpg' },
-    { pub: 'COSAS', title: 'COSAS Now — Profile', year: '2025', img: 'assets/works/16.jpg' },
-    { pub: 'CR Fashion Book', title: 'Everything You Missed in Fashion This Week', year: '2026', img: 'assets/works/17.jpg' },
-    { pub: 'CR Fashion Book', title: 'What You Missed in Fashion This Week', year: '2026', video: 'assets/home/23.mp4', poster: 'assets/home/23-poster.jpg' },
-    { pub: 'CR Fashion Book', title: 'Why Are Creative Directors So Obsessed with Vegetables?', year: '2026', img: 'assets/works/19.jpg' },
-    { pub: 'CR Fashion Book', title: 'Why Hermès Waited 190 Years to Enter Haute Couture', year: '2026', img: 'assets/works/20.jpg' },
-    { pub: 'CR Fashion Book', title: 'Alexander McQueen & Isabella Blow', year: '2026', img: 'assets/works/21.jpg' },
-    { pub: 'CR Fashion Book', title: 'The Return of Fur', year: '2026', img: 'assets/works/22.jpg' },
-    { pub: 'CR Fashion Book', title: 'The Spanish Village Elsa Peretti Brought Back to Life', year: '2026', img: 'assets/works/23.jpg' },
-    { pub: 'CR Fashion Book', title: 'Collaborations That Shocked the Fashion World', year: '2026', img: 'assets/works/24.jpg' },
+    { cat: 'production', pub: 'Vogue Philippines', title: 'The Wanderlust Issue', year: '2025', ar: '1300/1871', img: 'assets/works/01.jpg' },
+    { cat: 'production', pub: 'Schön! Magazine', title: 'Migrant Birds', year: '', img: 'assets/works/02.jpg' },
+    { cat: 'production', pub: "L'Officiel Baltic", title: 'Paulista', year: '', img: 'assets/works/03.jpg' },
+    { cat: 'production', pub: 'Institute Magazine', title: 'Nomad', year: '', img: 'assets/works/04.jpg' },
+    { cat: 'writing', pub: 'V Magazine', title: 'What V Want — V155', year: '2025', ar: '1300/1777', img: 'assets/works/05.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'CR Reviews: Jacquemus Fall 2026', year: '2026', video: 'assets/home/10.mp4', poster: 'assets/home/10-poster.jpg' },
+    { cat: 'writing', pub: 'V Magazine', title: 'V Girls — V160', year: '2026', ar: '1800/1200', img: 'assets/works/07.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: "The Mastery of Shaun Leane's Runway Jewelry", year: '2026', img: 'assets/works/08.jpg' },
+    { cat: 'writing', pub: 'COSAS', title: 'Sara Flores: Una mujer que teje la naturaleza', year: '2024', ar: '1800/1243', img: 'assets/works/09.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'Remembering Valentino Garavani by His Iconic Designs', year: '2026', img: 'assets/works/10.jpg' },
+    { cat: 'writing', pub: 'V Magazine', title: "Inside Harry Lambert's Pandora Wonders", year: '2026', img: 'assets/works/11.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: "Inside Yves Saint Laurent's Moroccan Sanctuary", year: '2026', img: 'assets/works/12.jpg' },
+    { cat: 'writing', pub: 'VMAN', title: 'What VMen Want — VMAN 55', year: '2025', ar: '1300/1706', img: 'assets/works/13.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'Milan Fashion Week Recap', year: '2026', img: 'assets/works/14.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'How Versace Accidentally Created Google Images', year: '2026', img: 'assets/works/15.jpg' },
+    { cat: 'writing', pub: 'COSAS', title: 'COSAS Now — Profile', year: '2025', ar: '1300/1802', img: 'assets/works/16.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'Everything You Missed in Fashion This Week', year: '2026', img: 'assets/works/17.jpg' },
+    { cat: 'social', pub: 'CR Fashion Book', title: 'What You Missed in Fashion This Week', year: '2026', video: 'assets/home/23.mp4', poster: 'assets/home/23-poster.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'Why Are Creative Directors So Obsessed with Vegetables?', year: '2026', img: 'assets/works/19.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'Why Hermès Waited 190 Years to Enter Haute Couture', year: '2026', img: 'assets/works/20.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'Alexander McQueen & Isabella Blow', year: '2026', img: 'assets/works/21.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'The Return of Fur', year: '2026', img: 'assets/works/22.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'The Spanish Village Elsa Peretti Brought Back to Life', year: '2026', img: 'assets/works/23.jpg' },
+    { cat: 'writing', pub: 'CR Fashion Book', title: 'Collaborations That Shocked the Fashion World', year: '2026', img: 'assets/works/24.jpg' },
   ];
   // ─────────────────────────────────────────────────────────────────────────
 
   const pad = (n) => String(n).padStart(2, '0');
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const list = document.getElementById('items');
 
-  list.innerHTML = WORKS.map((w, i) => {
+  const card = (w, i) => {
     const media = w.video
       ? `<video src="${w.video}" poster="${w.poster}" muted loop playsinline preload="none" aria-label="${esc(w.title)}"></video>`
       : `<img src="${w.img}" width="1000" height="1250" alt="${esc(w.pub)} — ${esc(w.title)}" loading="lazy" decoding="async">`;
-    return `<li class="item rv" data-img="${w.img || w.poster}">
-      <div class="media">${media}</div>
+    const doc = w.ar ? ' doc' : '';
+    const [aw, ah] = (w.ar || '4/5').split('/').map(Number);
+    const wide = w.ar && aw > ah ? ' wide' : '';
+    const ar = w.ar ? ` style="--ar:${w.ar}"` : '';
+    return `<li class="item rv${doc}${wide}" data-img="${w.img || w.poster}" data-ar="${w.ar || ''}">
+      <div class="media"${ar}>${media}</div>
       <div class="row">
         <div class="meta mono"><span class="n">/${pad(i + 1)}</span><span class="pub">${esc(w.pub)}</span><span class="yr">${w.year || '—'}</span></div>
         <h3 class="title">${esc(w.title)}</h3>
       </div>
     </li>`;
+  };
+
+  const years = (items) => {
+    const ys = items.map((w) => w.year).filter(Boolean).sort();
+    if (!ys.length) return '—';
+    return ys[0] === ys[ys.length - 1] ? ys[0] : `${ys[0]} — ${ys[ys.length - 1]}`;
+  };
+
+  document.getElementById('chapters').innerHTML = CHAPTERS.map((c, ci) => {
+    const items = WORKS.filter((w) => w.cat === c.id);
+    const body = items.length
+      ? `<ul class="items" data-view="grid">${items.map(card).join('')}</ul>`
+      : `<p class="ch-empty rv">Coming soon.</p>`;
+    return `<section class="chapter${items.length ? '' : ' empty'}" id="${c.id}" aria-labelledby="ch-${c.id}">
+      <div class="ch-head rv">
+        <div class="ch-meta mono mute">
+          <span>(${pad(ci + 1)} / ${pad(CHAPTERS.length)})</span>
+          <span>${esc(c.note)}</span>
+          <span>(${pad(items.length)})</span>
+        </div>
+        <h3 class="ch-title" id="ch-${c.id}">${esc(c.n)}</h3>
+      </div>
+      ${body}
+    </section>`;
   }).join('');
+
+  const lists = [...document.querySelectorAll('.items')];
   document.getElementById('works-count').textContent = `(${WORKS.length})`;
 
   // Fotos: aparecen suave al terminar de cargar
-  list.querySelectorAll('img').forEach((img) => {
+  document.querySelectorAll('.items img').forEach((img) => {
     if (img.complete && img.naturalWidth) img.classList.add('ok');
     else img.addEventListener('load', () => img.classList.add('ok'), { once: true });
   });
@@ -359,31 +420,57 @@
   }, { threshold: .15 }) : null;
   document.querySelectorAll('video').forEach((v) => vio && vio.observe(v));
 
-  // Cambio de vista
+  // Cambio de vista (aplica a los tres capítulos a la vez)
   const buttons = document.querySelectorAll('.views button');
   buttons.forEach((b) => b.addEventListener('click', () => {
-    if (list.dataset.view === b.dataset.v) return;
+    if (lists[0] && lists[0].dataset.view === b.dataset.v) return;
     buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    list.classList.add('switching');
+    lists.forEach((l) => l.classList.add('switching'));
     setTimeout(() => {
-      list.dataset.view = b.dataset.v;
-      list.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
-      list.classList.remove('switching');
+      lists.forEach((l) => {
+        l.dataset.view = b.dataset.v;
+        l.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
+        l.classList.remove('switching');
+      });
     }, reduce ? 0 : 220);
   }));
 
   // Vista List: miniatura que sigue el cursor
   const prev = document.getElementById('preview');
-  list.addEventListener('mousemove', (e) => {
+  const chapters = document.getElementById('chapters');
+  chapters.addEventListener('mousemove', (e) => {
     const it = e.target.closest('.item');
-    if (list.dataset.view !== 'list' || !it) { prev.classList.remove('on'); return; }
+    const ul = it && it.closest('.items');
+    if (!ul || ul.dataset.view !== 'list') { prev.classList.remove('on'); return; }
     const url = `url("${it.dataset.img}")`;
-    if (prev.style.backgroundImage !== url) prev.style.backgroundImage = url;
+    if (prev.style.backgroundImage !== url) {
+      prev.style.backgroundImage = url;
+      prev.style.setProperty('--ar', it.dataset.ar || '4 / 5');
+      prev.style.backgroundSize = it.dataset.ar ? 'contain' : 'cover';
+      prev.style.backgroundColor = it.dataset.ar ? 'transparent' : '#ddd';
+    }
     prev.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 140}px)`;
     prev.classList.add('on');
   });
-  list.addEventListener('mouseleave', () => prev.classList.remove('on'));
+  chapters.addEventListener('mouseleave', () => prev.classList.remove('on'));
+
+  // Barra superior: marca el capítulo que se está viendo
+  const navLinks = [...document.querySelectorAll('.top nav a')];
+  const targets = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && targets.length) {
+    const seen = new Map();
+    const sio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => seen.set(e.target.id, e.intersectionRatio));
+      let best = '', ratio = 0;
+      seen.forEach((r, id) => { if (r > ratio) { ratio = r; best = id; } });
+      navLinks.forEach((a) => {
+        if (ratio > 0 && a.getAttribute('href') === `#${best}`) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }, { threshold: [0, .15, .35, .6, .85] });
+    targets.forEach((t) => sio.observe(t));
+  }
 </script>
 </body>
 </html>
