@@ -99,7 +99,10 @@
   .item .media img { opacity: 0; }
   .item .media img.ok { opacity: 1; }
   .item:hover .media img, .item:hover .media video { transform: scale(1.035); }
+  .item a { display: block; color: inherit; }
   .item .meta { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; margin-top: 8px; }
+  .item .title { transition: background-size .35s var(--ease); background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; display: inline; }
+  .item:hover .title { background-size: 100% 1px; }
   .item .title { margin: 3px 0 0; font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: -.005em; }
 
   /* Vista Grid (4 columnas pegadas) */
@@ -262,7 +265,7 @@
     </div>
     <figure class="vid rv" style="margin:0">
       <video src="assets/home/00.mp4" poster="assets/home/00-poster.jpg" width="1600" height="900" autoplay muted loop playsinline preload="metadata" aria-label="Barrios de Lima — film"></video>
-      <figcaption class="cap-row mono"><span>/01</span><span>Barrios de Lima — Film</span></figcaption>
+      <figcaption class="cap-row mono"><span>/01</span><a class="link-u" href="proyectos/neighborhoods-of-lima.html">Barrios de Lima — Film ↗</a></figcaption>
     </figure>
   </section>
 
@@ -317,32 +320,32 @@
   // ─── EDITA AQUÍ los trabajos (orden = orden dentro de su capítulo) ──────
   // cat: writing | social | production  ·  pub · title · year ('' si no se sabe) · img o video
   const WORKS = [
-    { cat: 'production', pub: 'Vogue Philippines', title: 'The Wanderlust Issue', year: '2025', ar: '1300/1871', img: 'assets/works/01.jpg' },
-    { cat: 'production', pub: 'Schön! Magazine', title: 'Migrant Birds', year: '', img: 'assets/works/02.jpg' },
-    { cat: 'production', pub: "L'Officiel Baltic", title: 'Paulista', year: '', img: 'assets/works/03.jpg' },
-    { cat: 'production', pub: 'Institute Magazine', title: 'Nomad', year: '', img: 'assets/works/04.jpg' },
-    { cat: 'writing', pub: 'V Magazine', title: 'What V Want — V155', year: '2025', ar: '1300/1777', img: 'assets/works/05.jpg' },
-    { cat: 'writing', pub: 'V Magazine', title: 'What V Want — V156', year: '2025', ar: '1300/1774', img: 'assets/works/25.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'CR Reviews: Jacquemus Fall 2026', year: '2026', video: 'assets/home/10.mp4', poster: 'assets/home/10-poster.jpg' },
-    { cat: 'writing', pub: 'V Magazine', title: 'V Girls — V160', year: '2026', ar: '1800/1200', img: 'assets/works/26.jpg' },
-    { cat: 'writing', pub: 'V Magazine', title: 'V Girls — V160, continued', year: '2026', ar: '1800/1200', img: 'assets/works/07.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: "The Mastery of Shaun Leane's Runway Jewelry", year: '2026', img: 'assets/works/08.jpg' },
-    { cat: 'writing', pub: 'COSAS', title: 'Sara Flores: Una mujer que teje la naturaleza', year: '2024', ar: '1800/1243', img: 'assets/works/09.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'Remembering Valentino Garavani by His Iconic Designs', year: '2026', img: 'assets/works/10.jpg' },
-    { cat: 'writing', pub: 'V Magazine', title: "Inside Harry Lambert's Pandora Wonders", year: '2026', img: 'assets/works/11.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: "Inside Yves Saint Laurent's Moroccan Sanctuary", year: '2026', img: 'assets/works/12.jpg' },
-    { cat: 'writing', pub: 'VMAN', title: 'What VMen Want — VMAN 55', year: '2025', ar: '1300/1706', img: 'assets/works/13.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'Milan Fashion Week Recap', year: '2026', img: 'assets/works/14.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'How Versace Accidentally Created Google Images', year: '2026', img: 'assets/works/15.jpg' },
-    { cat: 'writing', pub: 'COSAS', title: 'COSAS Now — Profile', year: '2025', ar: '1300/1802', img: 'assets/works/16.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'Everything You Missed in Fashion This Week', year: '2026', img: 'assets/works/17.jpg' },
-    { cat: 'social', pub: 'CR Fashion Book', title: 'What You Missed in Fashion This Week', year: '2026', video: 'assets/home/23.mp4', poster: 'assets/home/23-poster.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'Why Are Creative Directors So Obsessed with Vegetables?', year: '2026', img: 'assets/works/19.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'Why Hermès Waited 190 Years to Enter Haute Couture', year: '2026', img: 'assets/works/20.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'Alexander McQueen & Isabella Blow', year: '2026', img: 'assets/works/21.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'The Return of Fur', year: '2026', img: 'assets/works/22.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'The Spanish Village Elsa Peretti Brought Back to Life', year: '2026', img: 'assets/works/23.jpg' },
-    { cat: 'writing', pub: 'CR Fashion Book', title: 'Collaborations That Shocked the Fashion World', year: '2026', img: 'assets/works/24.jpg' },
+    { slug: 'vogue-ph', cat: 'production', pub: 'Vogue Philippines', title: 'The Wanderlust Issue', year: '2025', ar: '1300/1871', img: 'assets/works/01.jpg' },
+    { slug: 'schon', cat: 'production', pub: 'Schön! Magazine', title: 'Migrant Birds', year: '', img: 'assets/works/02.jpg' },
+    { slug: 'lofficiel-baltic', cat: 'production', pub: "L'Officiel Baltic", title: 'Paulista', year: '', img: 'assets/works/03.jpg' },
+    { slug: 'institute-magazine', cat: 'production', pub: 'Institute Magazine', title: 'Nomad', year: '', img: 'assets/works/04.jpg' },
+    { slug: 'what-v-want-v-155', cat: 'writing', pub: 'V Magazine', title: 'What V Want — V155', year: '2025', ar: '1300/1777', img: 'assets/works/05.jpg' },
+    { slug: 'what-v-want-v-156', cat: 'writing', pub: 'V Magazine', title: 'What V Want — V156', year: '2025', ar: '1300/1774', img: 'assets/works/25.jpg' },
+    { slug: 'jaquemus-review', cat: 'social', pub: 'CR Fashion Book', title: 'CR Reviews: Jacquemus Fall 2026', year: '2026', video: 'assets/home/10.mp4', poster: 'assets/home/10-poster.jpg' },
+    { slug: 'v-girls-160', cat: 'writing', pub: 'V Magazine', title: 'V Girls — V160', year: '2026', ar: '1800/1200', img: 'assets/works/26.jpg' },
+    { slug: 'shaun-leane', cat: 'social', pub: 'CR Fashion Book', title: "The Mastery of Shaun Leane's Runway Jewelry", year: '2026', img: 'assets/works/08.jpg' },
+    { slug: 'cosas-2024', cat: 'writing', pub: 'COSAS', title: 'Sara Flores: Una mujer que teje la naturaleza', year: '2024', ar: '1800/1243', img: 'assets/works/09.jpg' },
+    { slug: 'tribute-to-valentino', cat: 'social', pub: 'CR Fashion Book', title: 'Remembering Valentino Garavani by His Iconic Designs', year: '2026', img: 'assets/works/10.jpg' },
+    { slug: 'harry-lambert', cat: 'writing', pub: 'V Magazine', title: "Inside Harry Lambert's Pandora Wonders", year: '2026', img: 'assets/works/11.jpg' },
+    { slug: 'ysl-villa', cat: 'social', pub: 'CR Fashion Book', title: "Inside Yves Saint Laurent's Moroccan Sanctuary", year: '2026', img: 'assets/works/12.jpg' },
+    { slug: 'what-vmen-want-vman-55', cat: 'writing', pub: 'VMAN', title: 'What VMen Want — VMAN 55', year: '2025', ar: '1300/1706', img: 'assets/works/13.jpg' },
+    { slug: 'milan-fw-round-up', cat: 'social', pub: 'CR Fashion Book', title: 'Milan Fashion Week Recap', year: '2026', img: 'assets/works/14.jpg' },
+    { slug: 'versace-google', cat: 'social', pub: 'CR Fashion Book', title: 'How Versace Accidentally Created Google Images', year: '2026', img: 'assets/works/15.jpg' },
+    { slug: 'cosas-2025', cat: 'writing', pub: 'COSAS', title: 'COSAS Now — Profile', year: '2025', ar: '1300/1802', img: 'assets/works/16.jpg' },
+    { slug: 'everything-fashion', cat: 'social', pub: 'CR Fashion Book', title: 'Everything You Missed in Fashion This Week', year: '2026', img: 'assets/works/17.jpg' },
+    { slug: 'everything-you-missed-in-fashion', cat: 'social', pub: 'CR Fashion Book', title: 'What You Missed in Fashion This Week', year: '2026', video: 'assets/home/23.mp4', poster: 'assets/home/23-poster.jpg' },
+    { slug: 'jpg-hermes', cat: 'social', pub: 'CR Fashion Book', title: 'Hermès by Jean Paul Gaultier', year: '2026', ar: '2000/2500', img: 'assets/proyectos/jpg-hermes/09.jpg' },
+    { slug: 'cd-and-veggies', cat: 'writing', pub: 'CR Fashion Book', title: 'Why Are Creative Directors So Obsessed with Vegetables?', year: '2026', img: 'assets/works/19.jpg' },
+    { slug: 'hermes-hc', cat: 'writing', pub: 'CR Fashion Book', title: 'Why Hermès Waited 190 Years to Enter Haute Couture', year: '2026', img: 'assets/works/20.jpg' },
+    { slug: 'mcqueen', cat: 'writing', pub: 'CR Fashion Book', title: 'Alexander McQueen & Isabella Blow', year: '2026', img: 'assets/works/21.jpg' },
+    { slug: 'fur', cat: 'writing', pub: 'CR Fashion Book', title: 'The Return of Fur', year: '2026', img: 'assets/works/22.jpg' },
+    { slug: 'elsa-peretti', cat: 'writing', pub: 'CR Fashion Book', title: 'The Spanish Village Elsa Peretti Brought Back to Life', year: '2026', img: 'assets/works/23.jpg' },
+    { slug: 'collabs-that-shocked-the-fashion-world', cat: 'writing', pub: 'CR Fashion Book', title: 'Collaborations That Shocked the Fashion World', year: '2026', img: 'assets/works/24.jpg' },
   ];
   // ─────────────────────────────────────────────────────────────────────────
 
@@ -358,11 +361,13 @@
     const wide = w.ar && aw > ah ? ' wide' : '';
     const ar = w.ar ? ` style="--ar:${w.ar}"` : '';
     return `<li class="item rv${doc}${wide}" data-img="${w.img || w.poster}" data-ar="${w.ar || ''}">
-      <div class="media"${ar}>${media}</div>
-      <div class="row">
-        <div class="meta mono"><span class="n">/${pad(i + 1)}</span><span class="pub">${esc(w.pub)}</span><span class="yr">${w.year || '—'}</span></div>
-        <h3 class="title">${esc(w.title)}</h3>
-      </div>
+      <a href="proyectos/${w.slug}.html">
+        <div class="media"${ar}>${media}</div>
+        <div class="row">
+          <div class="meta mono"><span class="n">/${pad(i + 1)}</span><span class="pub">${esc(w.pub)}</span><span class="yr">${w.year || '—'}</span></div>
+          <h3 class="title">${esc(w.title)}</h3>
+        </div>
+      </a>
     </li>`;
   };
 
